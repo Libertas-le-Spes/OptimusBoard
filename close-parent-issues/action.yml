@@ -1,0 +1,11 @@
+name: Close finished parent issues
+description: Closes a story when its last task closes and an epic when its last story does, and reopens them when a sub-issue is reopened
+runs:
+  using: composite
+  steps:
+    - name: Close or reopen the parent issues
+      uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3
+      env:
+        AUTOBOARD_SCRIPT: ${{ github.action_path }}/close-or-reopen-parents.cjs
+      with:
+        script: await require(process.env.AUTOBOARD_SCRIPT)({ github, context, core })

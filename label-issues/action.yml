@@ -1,0 +1,11 @@
+name: Label issues by title
+description: Labels an issue epic, story or task from its title prefix, and swaps or removes the label when the prefix changes
+runs:
+  using: composite
+  steps:
+    - name: Label the issue from its title
+      uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3
+      env:
+        AUTOBOARD_SCRIPT: ${{ github.action_path }}/label-issue.cjs
+      with:
+        script: await require(process.env.AUTOBOARD_SCRIPT)({ github, context })
