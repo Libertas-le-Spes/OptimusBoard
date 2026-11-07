@@ -1,5 +1,5 @@
 {
-  "name": "autoboard",
+  "name": "optimusboard",
   "version": "0.1.0",
   "description": "Board automation for GitHub projects: issue type labels from titles, and closing finished parent issues",
   "private": true,

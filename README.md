@@ -1,4 +1,4 @@
-# AutoBoard
+# OptimusBoard
 
 Board automation shared by the Libertas-le-Spes projects, so each project calls it instead of keeping its own copy. A fix made here reaches every project when it moves its pinned commit forward.
 
@@ -32,7 +32,7 @@ jobs:
   label:
     runs-on: ubuntu-latest
     steps:
-      - uses: Libertas-le-Spes/AutoBoard/label-issues@<commit>
+      - uses: Libertas-le-Spes/OptimusBoard/label-issues@<commit>
 ```
 
 ```yaml
@@ -55,7 +55,7 @@ jobs:
   parents:
     runs-on: ubuntu-latest
     steps:
-      - uses: Libertas-le-Spes/AutoBoard/close-parent-issues@<commit>
+      - uses: Libertas-le-Spes/OptimusBoard/close-parent-issues@<commit>
 ```
 
 This repo is private, so only repositories in the Libertas-le-Spes organisation can call it. That is set under **Settings → Actions → General → Access**.
@@ -67,4 +67,4 @@ npm install
 npm test
 ```
 
-AutoBoard labels its own issues with `label-issues`, so a change can be tried live on an issue here before any project moves to it.
+OptimusBoard labels its own issues with `label-issues`, so a change can be tried live on an issue here before any project moves to it.
