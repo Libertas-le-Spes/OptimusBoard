@@ -7,7 +7,7 @@ This README describes a project that grows in small steps: parts of it may still
 | Action | What it does |
 |---|---|
 | `label-issues` | Labels an issue `epic`, `story` or `task` from its title prefix (`[EPIC]`, `[STORY]`, `[TASK]`), and swaps or removes the label when the prefix changes. It reads the issue as it is when it runs, so quick retitles end on the right label |
-| `close-parent-issues` | Closes a story when its last task closes, and an epic when its last story does. Reopens a completed parent when a sub-issue is reopened |
+| `close-parent-issues` | Closes a story when its last task closes, and an epic when its last story does. Reopens a completed parent when a sub-issue is reopened. It fails rather than act when a parent is in another repository, when a parent has more sub-issues than it can read (over 100), or on any event other than closed and reopened |
 
 ## Using it in a project
 
@@ -58,13 +58,13 @@ jobs:
       - uses: Libertas-le-Spes/OptimusBoard/close-parent-issues@<commit>
 ```
 
-This repo is private, so only repositories in the Libertas-le-Spes organisation can call it. That is set under **Settings → Actions → General → Access**.
+This repo is private, so only **private** repositories in the Libertas-le-Spes organisation can call it. That is set under **Settings → Actions → General → Access**. A public repository can't call an action in a private one, so a public project needs this repo made public first.
 
 ## Tests
 
 ```
-npm install
+npm ci
 npm test
 ```
 
-OptimusBoard labels its own issues with `label-issues`, so a change can be tried live on an issue here before any project moves to it.
+OptimusBoard runs both actions on its own issues, so a change can be tried live here before any project moves to it.
