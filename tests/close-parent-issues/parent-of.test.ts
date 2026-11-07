@@ -25,6 +25,11 @@ describe("parentOf", () => {
     await expect(parentOf(toolsAnswering([answer]), 4)).rejects.toThrow("#2 is in primary/other, not primary/board");
   });
 
+  it("refuses a parent in a repository of the same name under another owner", async () => {
+    const answer = parentAnswer({ number: 2, state: "OPEN", stateReason: null, children: [doneChild], repository: "other/board" });
+    await expect(parentOf(toolsAnswering([answer]), 4)).rejects.toThrow("#2 is in other/board, not primary/board");
+  });
+
   it("refuses a parent whose sub-issues couldn't all be read", async () => {
     const answer = parentAnswer({ number: 2, state: "OPEN", stateReason: null, children: [doneChild], totalCount: 101 });
     await expect(parentOf(toolsAnswering([answer]), 4)).rejects.toThrow("#2 has 101 sub-issues, but only 1 could be read");

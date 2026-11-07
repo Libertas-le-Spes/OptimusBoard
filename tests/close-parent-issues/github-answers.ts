@@ -1,7 +1,7 @@
 import { vi } from "vitest";
 
 type State = "OPEN" | "CLOSED";
-type Reason = "COMPLETED" | "NOT_PLANNED" | "DUPLICATE" | null;
+type Reason = "COMPLETED" | "NOT_PLANNED" | "DUPLICATE" | "REOPENED" | null;
 
 interface Child {
   state: State;

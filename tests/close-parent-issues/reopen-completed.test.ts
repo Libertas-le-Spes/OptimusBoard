@@ -32,9 +32,15 @@ describe("reopenCompletedParents", () => {
   });
 
   it("leaves a parent that is already open, and stops there", async () => {
-    const tools = toolsAnswering([parentAnswer({ number: 2, state: "OPEN", stateReason: null, children: [openChild] })]);
+    const tools = toolsAnswering([parentAnswer({ number: 2, state: "OPEN", stateReason: "REOPENED", children: [openChild] })]);
     await reopenCompletedParents(tools, 4);
     expect(tools.github.rest.issues.update).not.toHaveBeenCalled();
     expect(tools.github.graphql).toHaveBeenCalledOnce();
+  });
+
+  it("leaves a parent reported as open, even with a completed reason", async () => {
+    const tools = toolsAnswering([parentAnswer({ number: 2, state: "OPEN", stateReason: "COMPLETED", children: [openChild] })]);
+    await reopenCompletedParents(tools, 4);
+    expect(tools.github.rest.issues.update).not.toHaveBeenCalled();
   });
 });

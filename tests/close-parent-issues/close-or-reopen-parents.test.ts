@@ -6,15 +6,16 @@ const closeOrReopenParents = createRequire(import.meta.url)("../../close-parent-
 
 describe("closeOrReopenParents", () => {
   it("closes finished parents when an issue is closed", async () => {
-    const tools = toolsAnswering([parentAnswer({ number: 2, state: "OPEN", stateReason: null, children: [doneChild] }), noParent()], "closed", 4);
+    const tools = toolsAnswering([parentAnswer({ number: 2, state: "OPEN", stateReason: null, children: [doneChild] }), noParent()], "closed", 7);
     await closeOrReopenParents(tools);
-    expect(tools.github.graphql).toHaveBeenNthCalledWith(1, expect.any(String), { ...REPO, number: 4 });
+    expect(tools.github.graphql).toHaveBeenNthCalledWith(1, expect.any(String), { ...REPO, number: 7 });
     expect(tools.github.rest.issues.update).toHaveBeenCalledExactlyOnceWith({ ...REPO, issue_number: 2, state: "closed", state_reason: "completed" });
   });
 
   it("reopens completed parents when an issue is reopened", async () => {
-    const tools = toolsAnswering([parentAnswer({ number: 2, state: "CLOSED", stateReason: "COMPLETED", children: [openChild] }), noParent()], "reopened", 4);
+    const tools = toolsAnswering([parentAnswer({ number: 2, state: "CLOSED", stateReason: "COMPLETED", children: [openChild] }), noParent()], "reopened", 7);
     await closeOrReopenParents(tools);
+    expect(tools.github.graphql).toHaveBeenNthCalledWith(1, expect.any(String), { ...REPO, number: 7 });
     expect(tools.github.rest.issues.update).toHaveBeenCalledExactlyOnceWith({ ...REPO, issue_number: 2, state: "open" });
   });
 
