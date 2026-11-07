@@ -58,7 +58,7 @@ jobs:
       - uses: Libertas-le-Spes/OptimusBoard/close-parent-issues@<commit>
 ```
 
-This repo is private, so only **private** repositories in the Libertas-le-Spes organisation can call it. That is set under **Settings → Actions → General → Access**. A public repository can't call an action in a private one, so a public project needs this repo made public first.
+This repo is public, so any repository can call it, in any organisation. Pinning to a commit is what keeps a caller safe from changes here.
 
 ## Tests
 
