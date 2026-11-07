@@ -1,0 +1,14 @@
+{
+  "name": "autoboard",
+  "version": "0.1.0",
+  "description": "Board automation for GitHub projects: issue type labels from titles, and closing finished parent issues",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "vitest run"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "vitest": "^5.1.0"
+  }
+}
