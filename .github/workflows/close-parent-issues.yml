@@ -1,0 +1,25 @@
+name: Close finished stories and epics
+
+on:
+  issues:
+    types: [closed, reopened]
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: close-parent-issues
+  cancel-in-progress: false
+  queue: max
+
+jobs:
+  parents:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out OptimusBoard
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - name: Close or reopen the parent issues
+        uses: ./close-parent-issues
